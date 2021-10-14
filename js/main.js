@@ -18,29 +18,74 @@ const text = [
 
 const selected = document.querySelector(".selected");
 const thumbnails = document.querySelector(".thumbnails");
-let selectedIndex = 2;
+const btnPrevious = document.querySelector(".previous");
+const btnNext = document.querySelector(".next");
+const activeClass = "active";
+
+let selectedIndex = 0;
 
 for (let i = 0; i < items.length; i++) {
   let imgContainer = document.createElement("div");
   imgContainer.classList.add("img-container");
+  let thumbnailContainer = document.createElement("div");
+  thumbnailContainer.classList.add("thumbnail-container");
   let img = document.createElement("img");
   let thumbnail = document.createElement("img");
   img.src = items[i];
   thumbnail.src = items[i];
+
   if (i === selectedIndex) {
-    imgContainer.classList.add("active");
-    thumbnail.classList.add("active");
+    imgContainer.classList.add(activeClass);
+    thumbnailContainer.classList.add(activeClass);
   }
+
   let section = document.createElement("section");
   section.classList.add("image-description");
   let h2 = document.createElement("h2");
   h2.textContent = title[i];
   let p = document.createElement("p");
   p.textContent = text[i];
+
   section.append(h2);
   section.append(p);
-  imgContainer.append(img);
   imgContainer.append(section);
+  imgContainer.append(img);
+
+  thumbnailContainer.append(thumbnail);
   selected.append(imgContainer);
-  thumbnails.append(thumbnail);
+  thumbnails.append(thumbnailContainer);
 }
+
+btnPrevious.addEventListener("click", function () {
+  selectedIndex--;
+  if (selectedIndex === -1) {
+    selectedIndex = items.length - 1;
+  }
+  console.log("hei");
+  const active = document.querySelectorAll(`.${activeClass}`);
+  active.forEach((el) => el.classList.remove(activeClass));
+
+  const imgs = document.querySelectorAll(".img-container");
+  const thumbnailContainers = document.querySelectorAll(".thumbnail-container");
+
+  console.log(imgs);
+  imgs[selectedIndex].classList.add(activeClass);
+  thumbnailContainers[selectedIndex].classList.add(activeClass);
+});
+
+btnNext.addEventListener("click", function () {
+  selectedIndex++;
+
+  if (selectedIndex === items.length) {
+    selectedIndex = 0;
+  }
+
+  const active = document.querySelectorAll(`.${activeClass}`);
+  active.forEach((el) => el.classList.remove(activeClass));
+
+  const imgs = document.querySelectorAll(".img-container");
+  const thumbnailContainers = document.querySelectorAll(".thumbnail-container");
+
+  imgs[selectedIndex].classList.add(activeClass);
+  thumbnailContainers[selectedIndex].classList.add(activeClass);
+});

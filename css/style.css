@@ -8,12 +8,15 @@
 
 .container {
   height: 100vh;
+  max-height: 100vh;
   display: grid;
   place-items: center;
 }
 
 .carousel {
   width: 80%;
+  height: 75%;
+  min-height: 0;
   max-width: 992px;
   display: grid;
   grid-template-columns: 5fr 1fr;
@@ -21,12 +24,18 @@
 
 .selected {
   position: relative;
+  min-height: 0;
 }
 
 .img-container {
   position: absolute;
   inset: 0;
   opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.img-container.active {
+  opacity: 1;
 }
 
 .img-container img {
@@ -49,13 +58,39 @@
 }
 
 .thumbnails {
-  display: flex;
-  flex-direction: column;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, 1fr);
   position: relative;
+}
+
+.thumbnail-container {
+  min-height: 0;
+  position: relative;
+  height: 100%;
 }
 
 .thumbnails img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnails .active {
+  border: 2px solid white;
+  position: relative;
+}
+
+.thumbnail-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.active::after {
+  background: rgba(0, 0, 0, 0);
 }
 
 .arrow-btn {
@@ -83,22 +118,4 @@
 .arrow-btn i {
   font-size: 1.8rem;
   color: rgb(209, 209, 209);
-}
-
-.img-container.active {
-  opacity: 1;
-}
-
-.thumbnails .active {
-  border: 1px solid white;
-  position: relative;
-}
-
-.thumbnails .active::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(255, 255, 255);
 }
