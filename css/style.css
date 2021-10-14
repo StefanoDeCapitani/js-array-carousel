@@ -23,24 +23,38 @@
   position: relative;
 }
 
-.image {
+.img-container {
   position: absolute;
   inset: 0;
+  opacity: 0;
 }
 
-.image img {
+.img-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.tumbnails {
+.image-description {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  text-align: right;
+  color: white;
+  width: 50%;
+}
+
+.image-description h2 {
+  padding-bottom: 0.5rem;
+}
+
+.thumbnails {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.tumbnails img {
+.thumbnails img {
   width: 100%;
 }
 
@@ -53,6 +67,7 @@
   cursor: pointer;
   display: grid;
   place-items: center;
+  z-index: 1;
 }
 
 .arrow-btn.previous {
@@ -68,4 +83,22 @@
 .arrow-btn i {
   font-size: 1.8rem;
   color: rgb(209, 209, 209);
+}
+
+.img-container.active {
+  opacity: 1;
+}
+
+.thumbnails .active {
+  border: 1px solid white;
+  position: relative;
+}
+
+.thumbnails .active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
 }
