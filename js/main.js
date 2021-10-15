@@ -61,14 +61,12 @@ btnPrevious.addEventListener("click", function () {
   if (selectedIndex === -1) {
     selectedIndex = items.length - 1;
   }
-  console.log("hei");
   const active = document.querySelectorAll(`.${activeClass}`);
   active.forEach((el) => el.classList.remove(activeClass));
 
   const imgs = document.querySelectorAll(".img-container");
   const thumbnailContainers = document.querySelectorAll(".thumbnail-container");
 
-  console.log(imgs);
   imgs[selectedIndex].classList.add(activeClass);
   thumbnailContainers[selectedIndex].classList.add(activeClass);
 });
